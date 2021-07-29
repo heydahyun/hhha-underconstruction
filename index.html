@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<style>
+  @font-face {
+    font-family: Lausanne;
+    src: url("TWKLausanne-300.otf") format("opentype");
+  }
+
+  body {
+    margin: 0px;
+    font-family: Lausanne;
+  }
+
+  div {
+    position: absolute;
+    z-index: 1;
+  }
+  /* .container{
+    grid-template-columns: 1fr 2.5fr 1fr;
+  } */
+
+  .lo1{
+    font-size: 2.2vw;
+    top: 1.5vw;
+    position: absolute;
+    right: 1.5vw;
+  }
+  .lo2{
+    font-size: 2.2vw;
+    top: 1.5vw;
+    position: absolute;
+    right: 38vw;
+  }
+  .lo3{
+    font-size: 2.2vw;
+    top: 1.5vw;
+    position: absolute;
+    right: 28.2vw;
+  }
+  .lo4{
+    font-size: 4.4vw;
+    bottom: 0vw;
+    position: absolute;
+    left: 1.5vw;
+  }
+    @media screen and (max-width: 800px){
+      .lo1{
+        font-size: 5vw;
+        top: 2vw;
+        position: absolute;
+        right: 2vw;
+      }
+      .lo2{
+        font-size: 5vw;
+        top: 8vw;
+        position: absolute;
+        right: 2vw;
+      }
+      .lo3{
+        font-size: 5vw;
+        top: 14vw;
+        position: absolute;
+        right: 2vw;
+      }
+      .lo4{
+        font-size: 7vw;
+        bottom: 0.5vw;
+        position: absolute;
+        left: 2vw;
+      }
+    }
+</style>
+
+<body>
+  <script src="https://cdn.jsdelivr.net/npm/p5@1.4.0/lib/p5.js"></script>
+
+<!-- <div class="container"> -->
+  <div class="lo3">E-mail</div>
+  <div class="lo2">Instagram</div>
+  <div class="lo1">Randomword Generator</div>
+  <div class="lo4">Under Construction...</div>
+  <!-- <div>E-mail</div> -->
+<!-- </div> -->
+
+  <script>
+    let fontRegular;
+    let fontSize = 420;
+    let mobileFont = 200;
+    let hiArray;
+    let r = 0;
+    let textIn = "HHHA";
+    // let textIn2 = "Under Construction...";
+    // let textIn3 = "E-mail";
+    let w = window.innerWidth;
+    let h = window.innerHeight;
+
+    function preload() {
+      fontRegular = loadFont('TWKLausanne-300.otf');
+      // bg = loadImage('1.png');
+    }
+
+    function setup() {
+      createCanvas(w, h);
+      textFont(fontRegular);
+      // var myTextArea = createElement('textarea',);
+      // myTextArea.attribute("placeholder","Texthere");
+      // myTextArea.attribute("spellcheck","false");
+      // ="false"
+      hiArray = fontRegular.textToPoints(textIn, windowWidth / 10, windowHeight / 2.5, fontSize, {
+        sampleFactor: 0.04
+      });
+      // print(hiArray);
+    }
+
+    function draw() {
+      background(172, 74, 254);
+
+
+      // text("hi",  windowWidth/10, windowHeight/2.5);
+
+      for (let i = 0; i < hiArray.length; i++) {
+        // ellipse(hiArray[i].x, hiArray[i].y, 10, 10);
+
+        // line(hiArray[i].x, hiArray[i].y, mouseX,mouseY);
+        textSize(fontSize);
+        push();
+        // translate(hiArray[i].x, hiArray[i].y, 0, 0);
+        translate(hiArray[i].x - 50, hiArray[i].y - 50, 0, 0);
+        // rotate(r);
+        // r++;
+        strokeWeight(1.2);
+
+        fill(255, 246, 110);
+        stroke(0);
+
+        // fill(255);
+        // arc(mouseX, mouseY, mouseX, mouseY,PI, TWO_PI);
+        rect(mouseX + 0, mouseY + 0, mouseX - 100, mouseY - 100);
+        pop();
+
+        if(windowWidth < 900) {
+          hiArray = fontRegular.textToPoints(textIn, windowWidth / 10, windowHeight / 2.5, mobileFont, {
+            sampleFactor: 0.05
+          });
+        }
+
+      }
+      // textSize(70);
+      // fill(0);
+      // text(textIn2, 20, windowHeight - 20);
+
+      // textSize(40);
+      // fill(0);
+      // text(textIn3, windowWidth -100,50);
+    }
+    // function windowResize() {
+    //   resizeCanvas(windowWidth, windowHeight, [true]);
+    // }
+    window.onresize = function() {
+      // assigns new values for width and height variables
+      w = window.innerWidth;
+      h = window.innerHeight;
+      resizeCanvas(w, h, [true]);
+    }
+
+  </script>
+
+</body>
+
+</html>
